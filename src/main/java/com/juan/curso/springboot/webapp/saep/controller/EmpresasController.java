@@ -31,7 +31,7 @@ public class EmpresasController
 
     @PutMapping("/{id}")
     public Empresas update(@PathVariable Long id, @RequestBody Empresas empresas) {
-        empresas.setID_Empresa(id);
+        empresas.setId_Empresas(id);
         return empresasRepository.save(empresas); // Actualiza producto existente
     }
 

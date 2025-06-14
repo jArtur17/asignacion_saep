@@ -8,15 +8,15 @@ public class Rol {
 
     @Id
     @GeneratedValue(strategy = GenerationType. IDENTITY)
-    private Long ID_rol;
+    private Long id_rol;
     private String roles;
 
-    public Long getID_rol() {
-        return ID_rol;
+    public Long getId_rol() {
+        return id_rol;
     }
 
-    public void setID_rol(Long ID_rol) {
-        this.ID_rol = ID_rol;
+    public void setId_rol(Long id_rol) {
+        this.id_rol = id_rol;
     }
 
     public String getRoles() {
