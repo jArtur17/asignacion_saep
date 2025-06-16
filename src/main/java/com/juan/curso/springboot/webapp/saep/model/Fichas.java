@@ -9,8 +9,16 @@ public class Fichas
     @Id
     @GeneratedValue(strategy = GenerationType. IDENTITY)
     private Long id_fichas;
-    private Integer id_programas,id_sede;
     private String codigo,modalidad,jornada,nivel_formacion,fecha_inicio,fecha_fin_lec,fecha_final,tipo_oferta,estado;
+
+    @ManyToOne
+    @JoinColumn(name = "id_programas")
+    private Programas idProgramas;
+
+    @ManyToOne
+    @JoinColumn(name = "id_sede")
+    private Sedes idSedes;
+
 
     public Long getId_fichas() {
         return id_fichas;
@@ -28,28 +36,12 @@ public class Fichas
         this.codigo = codigo;
     }
 
-    public Integer getId_programas() {
-        return id_programas;
-    }
-
-    public void setId_programas(Integer id_programas) {
-        this.id_programas = id_programas;
-    }
-
     public String getModalidad() {
         return modalidad;
     }
 
     public void setModalidad(String modalidad) {
         this.modalidad = modalidad;
-    }
-
-    public Integer getId_sede() {
-        return id_sede;
-    }
-
-    public void setId_sede(Integer id_sede) {
-        this.id_sede = id_sede;
     }
 
     public String getJornada() {
@@ -106,5 +98,21 @@ public class Fichas
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public Programas getIdProgramas() {
+        return idProgramas;
+    }
+
+    public void setIdProgramas(Programas idProgramas) {
+        this.idProgramas = idProgramas;
+    }
+
+    public Sedes getIdSedes() {
+        return idSedes;
+    }
+
+    public void setIdSedes(Sedes idSedes) {
+        this.idSedes = idSedes;
     }
 }

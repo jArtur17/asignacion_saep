@@ -3,6 +3,8 @@ package com.juan.curso.springboot.webapp.saep.controller;
 import com.juan.curso.springboot.webapp.saep.model.Empresas;
 import com.juan.curso.springboot.webapp.saep.model.Fichas;
 import com.juan.curso.springboot.webapp.saep.repository.FichasRepository;
+import com.juan.curso.springboot.webapp.saep.repository.ProgramasRepository;
+import com.juan.curso.springboot.webapp.saep.repository.SedesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class VistaFichas {
     @Autowired
     private FichasRepository fichasRepository;
+    private SedesRepository sedesRepository;
+    private ProgramasRepository programasRepository;
 
     @GetMapping("/vista/fichas")
     public String listar(Model model) {
@@ -25,6 +29,8 @@ public class VistaFichas {
     @GetMapping("/vistaf/form")
     public String formulario(Model model) {
         model.addAttribute("fichas", new Fichas()); // Objeto vacío para el formulario
+        model.addAttribute("sede", sedesRepository.findAll()); // Objeto vacío para el formulario
+        model.addAttribute("programas", programasRepository.findAll()); // Objeto vacío para el formulario
         return "fichas_form"; // Vista del formulario para crear
     }
     @PostMapping("/vistaf/guardar")
