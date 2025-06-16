@@ -82,7 +82,7 @@
             <td th:text="${usuarios.contacto2}"></td>
             <td th:text="${usuarios.clave}"></td>
             <td th:text="${usuarios.id_rol}"></td>
-            <td th:text="${programas.estado}"></td>
+            <td th:text="${usuarios.estado}"></td>
             <td>
                 <a th:href="@{'/vistau/editar/' + ${usuarios.id_usuarios}}" class="btn btn-warning btn-sm">Editar</a>
                 <form th:action="@{'/vistau/eliminar/' + ${usuarios.id_usuarios}}" method="post" style="display:inline;">

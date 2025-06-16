@@ -61,14 +61,14 @@
         </thead>
         <tbody>
         <!-- Itera sobre la lista de productos enviada desde el controlador -->
-        <tr th:each="sede : ${sede}">
-            <td th:text="${sede.id_sede}"></td>
-            <td th:text="${sede.nombre}"></td>
-            <td th:text="${sede.direccion}"></td>
-            <td th:text="${sede.estado}"></td>
+        <tr th:each="sedes : ${sedes}">
+            <td th:text="${sedes.id_sede}"></td>
+            <td th:text="${sedes.nombre}"></td>
+            <td th:text="${sedes.direccion}"></td>
+            <td th:text="${sedes.estado}"></td>
             <td>
-                <a th:href="@{'/vistas/editar/' + ${sede.id_sede}}" class="btn btn-warning btn-sm">Editar</a>
-                <form th:action="@{'/vistas/eliminar/' + ${sede.id_sede}}" method="post" style="display:inline;">
+                <a th:href="@{'/vistas/editar/' + ${sedes.id_sede}}" class="btn btn-warning btn-sm">Editar</a>
+                <form th:action="@{'/vistas/eliminar/' + ${sedes.id_sede}}" method="post" style="display:inline;">
                     <button type="submit" class="btn btn-danger btn-sm"
                             onclick="return confirm('¿Está seguro que desea eliminar este producto?')">
                         Eliminar
