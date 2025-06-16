@@ -72,9 +72,9 @@
         <tr th:each="fichas : ${fichas}">
             <td th:text="${fichas.id_fichas}"></td>
             <td th:text="${fichas.codigo}"></td>
-            <td th:text="${fichas.id_programas}"></td>
+            <td th:text="${fichas.idProgramas.nombre}"></td>
             <td th:text="${fichas.modalidad}"></td>
-            <td th:text="${fichas.id_sede}"></td>
+            <td th:text="${fichas.idSedes.nombre}"></td>
             <td th:text="${fichas.jornada}"></td>
             <td th:text="${fichas.nivel_formacion}"></td>
             <td th:text="${fichas.fecha_inicio}"></td>
