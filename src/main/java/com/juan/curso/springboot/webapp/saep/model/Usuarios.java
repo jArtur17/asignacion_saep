@@ -7,10 +7,15 @@ import jakarta.persistence.*;
 public class Usuarios
 {
     @Id
-    @GeneratedValue(strategy = GenerationType. IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_usuarios;
-    private Integer id_rol;
-    private String tipo_dc,numero,nombres,apellidos,email,email_insti,direccion,contacto1,contacto2,clave,estado;
+
+    private String tipo_dc, numero, nombres, apellidos, email, email_insti, direccion, contacto1, contacto2, clave, estado;
+
+    @ManyToOne
+    @JoinColumn(name="id_rol")
+    private Rol idRol;
+
 
     public Long getId_usuarios() {
         return id_usuarios;
@@ -108,11 +113,11 @@ public class Usuarios
         this.estado = estado;
     }
 
-    public Integer getId_rol() {
-        return id_rol;
+    public Rol getIdRol() {
+        return idRol;
     }
 
-    public void setId_rol(Integer id_rol) {
-        this.id_rol = id_rol;
+    public void setIdRol(Rol idRol) {
+        this.idRol = idRol;
     }
 }
