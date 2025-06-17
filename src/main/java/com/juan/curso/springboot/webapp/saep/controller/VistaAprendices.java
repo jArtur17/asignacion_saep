@@ -17,9 +17,13 @@ public class VistaAprendices
 {
     @Autowired
     private AprendicesRepository aprendicesRepository;
+    @Autowired
     private UsuariosRepository usuariosRepository;
+    @Autowired
     private FichasRepository fichasRepository;
+    @Autowired
     private ModalidadRepository modalidadRepository;
+    @Autowired
     private EmpresasRepository empresasRepository;
 
     @GetMapping("/vista/aprendices")
