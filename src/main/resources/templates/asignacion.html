@@ -42,10 +42,6 @@
     <!-- Título -->
     <h1 class="text-success">Asignación de Evaluadores</h1>
 
-    <form class="input-group mb-3" th:action="@{/vistaa/asignacion}" method="get">
-        <input type="text" name="buscar" class="form-control" placeholder="Buscar..." />
-        <button class="btn btn-outline-secondary" type="submit">🔍 Buscar</button>
-    </form>
 
     <!-- Mensaje flash si se guarda o elimina un producto -->
     <div th:if="${mensaje}" class="alert alert-success" th:text="${mensaje}"></div>
@@ -53,6 +49,12 @@
     <a th:href="@{/vista/aprendices}" class="btn btn-success mb-3">⬅️ Volver</a>
     <a href="/vistaA/pdf" class="btn btn-outline-danger mb-3">📄 Exportar a PDF</a>
     <a href="/vistaA/excel" class="btn btn-outline-success mb-3">📊 Exportar a Excel</a>
+
+    <form class="input-group mb-3" th:action="@{/vistaa/asignacion}" method="get">
+        <input type="text" name="buscar" class="form-control" placeholder="Buscar..." />
+        <button class="btn btn-outline-secondary" type="submit">🔍 Buscar</button>
+    </form>
+
 
     <!-- Tabla de productos -->
     <table class="table table-bordered table-striped">

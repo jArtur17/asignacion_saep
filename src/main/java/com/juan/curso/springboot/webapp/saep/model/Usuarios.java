@@ -12,9 +12,13 @@ public class Usuarios
 
     private String tipo_dc, numero, nombres, apellidos, email, email_insti, direccion, contacto1, contacto2, clave, estado;
 
+
+
+
     @ManyToOne
     @JoinColumn(name="id_rol")
     private Rol idRol;
+
 
 
     public Long getId_usuarios() {
