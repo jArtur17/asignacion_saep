@@ -6,6 +6,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.juan.curso.springboot.webapp.saep.model.Aprendices;
 import com.juan.curso.springboot.webapp.saep.model.Fichas;
 import com.juan.curso.springboot.webapp.saep.model.Sedes;
+import com.juan.curso.springboot.webapp.saep.model.Usuarios;
 import com.juan.curso.springboot.webapp.saep.repository.*;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.poi.ss.usermodel.Row;
@@ -48,10 +49,57 @@ public class VistaAprendices
     }
 
     @GetMapping("/vistaa/asignacion")
-    public String asignacion(Model model) {
-        model.addAttribute("aprendices", aprendicesRepository.findAll()); // Envía los productos a la vista
-        return "asignacion"; // Devuelve la plantilla productos.html// Vista del formulario para crear
+    public String asignacion(@RequestParam(value = "idAprendiz", required = false) Long idAprendiz, Model model) {
+        model.addAttribute("aprendices", aprendicesRepository.findAll());
+
+        List<Usuarios> evaluadores = usuariosRepository.findAll().stream()
+                .filter(u -> u.getIdRol() != null
+                        && u.getIdRol().getRoles() != null
+                        && u.getIdRol().getRoles().equalsIgnoreCase("Evaluador")
+                        && u.getEstado() != null
+                        && u.getEstado().equalsIgnoreCase("Activo"))
+                .toList();
+
+        model.addAttribute("evaluadores", evaluadores);
+        model.addAttribute("idAprendizSeleccionado", idAprendiz);
+
+        return "asignacion";
     }
+
+
+
+    @PostMapping("/vistaa/asignar-evaluador") //guardar evaluador en tabla de aprendices, ya sea asignar o reasignar
+    public String asignarEvaluador(@RequestParam("idAprendiz") Long idAprendiz,
+                                   @RequestParam("idInstructor") Integer idInstructor,
+                                   RedirectAttributes redirectAttributes) {
+
+        Aprendices aprendiz = aprendicesRepository.findById(idAprendiz).orElse(null);
+        if (aprendiz != null) {
+            Usuarios instructor = usuariosRepository.findById(Long.valueOf(idInstructor)).orElse(null);
+            if (instructor != null) {
+                aprendiz.setIdInstructor(instructor);
+                aprendicesRepository.save(aprendiz);
+                redirectAttributes.addFlashAttribute("mensaje", "Evaluador asignado correctamente.");
+            }
+        }
+        return "redirect:/vistaa/asignacion";
+    }
+
+    @PostMapping("/vistaa/eliminar-evaluador")
+    public String eliminarEvaluador(@RequestParam("idAprendiz") Long idAprendiz, RedirectAttributes redirectAttributes) {
+        Aprendices aprendiz = aprendicesRepository.findById(idAprendiz).orElse(null);
+
+        if (aprendiz != null) {
+            aprendiz.setIdInstructor(null); // eliminamos el evaluador
+            aprendicesRepository.save(aprendiz);
+            redirectAttributes.addFlashAttribute("mensaje", "Evaluador eliminado correctamente.");
+        } else {
+            redirectAttributes.addFlashAttribute("mensaje", "No se encontró el aprendiz.");
+        }
+
+        return "redirect:/vistaa/asignacion";
+    }
+
 
     @PostMapping("/vistaa/guardar")
     public String guardar(@ModelAttribute Aprendices aprendices, RedirectAttributes ra) {
